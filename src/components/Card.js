@@ -2,8 +2,6 @@ import React from 'react'
 
 const Card = ({title, imageLink}) => {
 
-  console.log(title,imageLink);
-
   return (
     <div className="flex p-3 m-auto w-9/12">
       <div className="w-1/3">
