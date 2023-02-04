@@ -7,6 +7,7 @@ const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [noMoreData, setNoMoreData] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -19,13 +20,16 @@ const Home = () => {
     else{
         axios
           .get(`http://localhost:3001/api/data/${page}`)
-          .then((response) =>
+          .then((response) =>{
+            if (!response.data.length) {
+              setNoMoreData(true);
+            }
             setNewsData((prevNewsData) => {
                 return {
                 ...prevNewsData,
                 nodes: prevNewsData.nodes.concat(response.data.nodes)
                 };
-            }))
+            })})
           .catch((error) => console.error(error));
     }
     setLoading(false);
@@ -56,8 +60,14 @@ const Home = () => {
           key={newsFeed?.node.nid}
           title={newsFeed?.node.title}
           imageLink={newsFeed?.node.field_photo_image_section}
+          updated={newsFeed?.node.last_update}
         />
       ))}
+      {
+        noMoreData && (
+          <div className="no-more-data">No more data</div>
+        ) /* In case there is no more data to load */
+      }
     </div>
   );
 };
