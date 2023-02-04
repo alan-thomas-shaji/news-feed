@@ -2,7 +2,7 @@ import React from 'react'
 
 const Card = ({title, imageLink, updated}) => {
 
-  const formattedDate = new Date(updated).toLocaleDateString();
+  const formattedDate = new Date(updated * 1000).toDateString();
 
   const loremIpsum = (limit) => {
     let lorem =
