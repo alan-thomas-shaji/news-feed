@@ -1,15 +1,20 @@
 import React from 'react'
 
-const Card = () => {
+const Card = ({title, imageLink}) => {
+
+  console.log(title,imageLink);
+
   return (
-    <div className="flex p-3 m-auto text-center justify-center w-9/12">
-      <div className="picture">
-        <img src="https://picsum.photos/200" alt="" className='rounded-lg'/>
+    <div className="flex p-3 m-auto w-9/12">
+      <div className="w-1/3">
+        <img
+          src={imageLink}
+          alt={title}
+          className="rounded-lg h-64 w-full object-cover"
+        />
       </div>
-      <div>
-        <p className='p-5'>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod, nesciunt blanditiis explicabo magnam earum illo accusantium nihil rerum et sequi dignissimos quisquam expedita eligendi quae pariatur ut modi id in!
-        </p>
+      <div className="w-2/3 pl-3">
+        <p className="font-bold text-xl">{title}</p>
       </div>
     </div>
   );

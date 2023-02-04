@@ -1,22 +1,23 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Navbar from "./components/Navbar";
 import axios from "axios";
 
-const App = () => {
+const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    axios.get("http://localhost:3001/api/data")
+    axios
+      .get("http://localhost:3001/api/data")
       .then((response) => setNewsData(response.data))
       .catch((error) => console.error(error));
     setLoading(false);
   }, []);
 
   return (
-    <div className="App">
+    <div className="Home">
       <Navbar />
       {newsData?.nodes?.map((newsFeed) => (
         <Card
@@ -29,4 +30,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
